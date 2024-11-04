@@ -1,0 +1,51 @@
+---
+title: "Leaflet Map"
+author: "Aprameya Nayak"
+date: "4th November 2024"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(htmltools)
+library(leaflet)
+```
+``` {r}
+print("created on:") 
+Sys.Date()
+```
+
+## Leaflet Map
+Leaflet is a lightweight, open-source JavaScript library for creating interactive maps, often used for embedding maps on web pages. It provides easy-to-use functions to add markers, popups, and layers, allowing developers to customize maps with minimal code. Leaflet is widely used because of its simplicity, flexibility, and compatibility with mobile and desktop devices, making it ideal for mapping applications. This RMD file contains a leaflet map that can be interacted with on R Pubs where it will be hosted as per the course requirments. Benrath Palace is a beautiful Rococo palace located in Düsseldorf, Germany. This map includes a clickable marker with an image and a link to the palace’s homepage.
+
+
+##Leaflet interactive map:
+
+```{r cars}
+# Set up custom icon for Benrath Palace
+benrathPalaceIcon <- makeIcon(
+  iconUrl = "http://www.schloss-benrath.de/fileadmin/_processed_/csm_corps-de-logis-blumen_2e04b2b859.jpg",
+  iconWidth = 30 * 408 / 255, iconHeight = 30,
+  iconAnchorX = 30 * 408 / 255 / 2, iconAnchorY = 30 / 2
+)
+
+# Create a custom HTML popup with a title and bordered image
+benrathPalacePopup <- HTML("<div style='text-align: center;'>
+                              <h4>Benrath Palace</h4>
+                              <a href='http://www.schloss-benrath.de/welcome/?L=1' target='_blank'>
+                                <img src='http://www.schloss-benrath.de/fileadmin/_processed_/csm_corps-de-logis-blumen_2e04b2b859.jpg' 
+                                     width='180' height='110' 
+                                     style='border: 1px solid #ccc; padding: 5px;' 
+                                     alt='Benrath Palace'>
+                              </a>
+                            </div>")
+
+# Use the default Leaflet marker and add the popup
+leaflet() %>%
+  addTiles() %>%
+  addMarkers(lat = 51.161027, lng = 6.870550, 
+             popup = benrathPalacePopup) %>%
+  setView(lng = 6.870550, lat = 51.161027, zoom = 14)
+
+
+```
